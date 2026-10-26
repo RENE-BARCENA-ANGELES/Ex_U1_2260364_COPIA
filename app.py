@@ -16,6 +16,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+with app.app_context():
+    db.create_all()
+
 # Modelo Categoría
 class Category(db.Model):
     __tablename__ = 'categories'
