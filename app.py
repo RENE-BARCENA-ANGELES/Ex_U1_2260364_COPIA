@@ -16,8 +16,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-with app.app_context():
-    db.create_all()
 
 # Modelo Categoría
 class Category(db.Model):
@@ -33,6 +31,9 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=True)
     category = db.relationship('Category', backref=db.backref('posts', lazy=True))
+
+with app.app_context():
+    db.create_all()
 
 # Ruta para ver todos los posts
 @app.route('/')
